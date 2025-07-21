@@ -1,7 +1,11 @@
 Options -MultiViews
 RewriteEngine On
+
+# Handle requests for existing files or directories
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.html [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+# Rewrite all other requests to index.html
+RewriteRule . index.html [L]
 
 # Enable CORS
 Header set Access-Control-Allow-Origin "*"
@@ -17,4 +21,4 @@ Options -Indexes
 # Security headers
 Header set X-Content-Type-Options "nosniff"
 Header set X-Frame-Options "SAMEORIGIN"
-Header set X-XSS-Protection "1; mode=block"
+Header set X-XSS-Protection "1; mode=block" 
